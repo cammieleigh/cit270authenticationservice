@@ -2,23 +2,28 @@ const bodyParser = require('body-parser');
 const express = require('express'); //import the library
 const app = express(); //use the library
 const md5 = require('md5');
-const redis = require('redis');
+const {createClient} = require('redis');
 
-const redisClient = redis.createClient();
+const redisClient = createClient({socket: {port:6379, host: '127.0.0.1'}});
 
 app.use(bodyParser.json()); 
 
-app.listen(3000, ()=>{console.log("listening...")});
+app.listen(3000, async ()=>{console.log("listening...")
+    await redisClient.connect()});
+
+
 
 //compare the hashed version of the password that was sent with the hashed version in the database
 
 
+
 app.post('/login', async (request, response)=>{ //a post is when a client sends new information to an API
-    const hashedPassword = md5(request.body.password);
-    const password = await redis.Client.hGet('passwords' , request.body.userName);
+    
     const loginRequest = request.body;
+    const requestHashedPassword = md5(request.body.password);
+    const redisHashedPassword = await redisClient.hGet('passwords' , request.body.userName);
     console.log("Request Body", request.body);
-    if (loginRequest.userName == "2school4cool@gmail.com" && loginRequest.password == "Tr00p$r"){
+    if  ( requestHashedPassword == redisHashedPassword){
         response.status(200);
         response.send("Welcome");
     }
@@ -29,4 +34,10 @@ app.post('/login', async (request, response)=>{ //a post is when a client sends 
 });
 
 app.get('/',(req,res)=>{res.send("Hello")});
+
+app.post('/signup', signup);
+const signup = (request,response) =>{
+    
+
+}
 
