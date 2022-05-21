@@ -33,11 +33,12 @@ app.post('/login', async (request, response)=>{ //a post is when a client sends 
     }
 });
 
+
 app.get('/',(req,res)=>{res.send("Hello")});
 
-app.post('/signup', signup);
-const signup = (request,response) =>{
+const signup = async (request,response) =>{
     
 
 }
+app.post('/signup', signup);
 
