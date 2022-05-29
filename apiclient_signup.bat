@@ -1,0 +1,1 @@
+curl -d "@data_signup.json" -H "content-type: application/json" -X POST http://localhost:3000/signup
