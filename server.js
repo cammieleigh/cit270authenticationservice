@@ -1,4 +1,6 @@
 const bodyParser = require('body-parser');
+const https = require('https');
+const fs = require('fs');
 const express = require('express'); //import the library
 const app = express(); //use the library
 const md5 = require('md5');
@@ -8,9 +10,13 @@ const redisClient = createClient({socket: {port:6379, host: '127.0.0.1'}});
 
 app.use(bodyParser.json()); 
 
-app.listen(3000, async ()=>{console.log("listening...")
-    await redisClient.connect()});
-
+https.createServer({
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.cert'),
+}, app).listen(3000, async () => {
+    await redisClient.connect();
+    console.log('Listening...')
+})
 
 
 //compare the hashed version of the password that was sent with the hashed version in the database
