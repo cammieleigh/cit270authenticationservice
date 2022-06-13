@@ -13,7 +13,8 @@ app.use(bodyParser.json());
 https.createServer({
     key: fs.readFileSync('server.key'),
     cert: fs.readFileSync('server.cert'),
-}, app).listen(3000, async () => {
+    passphrase: 'P@ssw0rd'
+}, app).listen(443, async () => {
     await redisClient.connect();
     console.log('Listening...')
 })

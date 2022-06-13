@@ -1,1 +1,1 @@
-curl --insecure -d "@data.json" -H "content-type: application/json" -X POST https://localhost:3000/login
+curl -d "@data.json" -H "content-type: application/json" -X POST https://cit270.com/login
