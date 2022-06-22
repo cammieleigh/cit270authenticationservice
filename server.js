@@ -10,6 +10,10 @@ const redisClient = createClient({socket: {port:6379, host: '127.0.0.1'}});
 
 app.use(bodyParser.json()); 
 
+redisClient = createClient(
+    {url: 'redis://defualt@10.128.0.3:6379',});
+
+
 https.createServer({
     key: fs.readFileSync('server.key'),
     cert: fs.readFileSync('server.cert'),
