@@ -1,0 +1,1 @@
+scp server.cert server.key cammi@cammie-nodejs.cit270.com:/tmp
