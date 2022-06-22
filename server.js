@@ -11,7 +11,7 @@ const {createClient} = require('redis');
 app.use(bodyParser.json()); 
 
 redisClient = createClient(
-    {url: 'redis://defualt@10.128.0.3:6379',});
+    {url: 'redis://default@10.128.0.3:6379',});
 
 
 https.createServer({
