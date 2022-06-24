@@ -47,10 +47,6 @@ app.post('/login', async (request, response)=>{ //a post is when a client sends 
 
 app.get('/',(req,res)=>{res.send("Hello")});
 
-const signup = async (request,response) =>{
-    
-
-}
 
 const savePassword = async (request, response) =>{
     const clearTextPassword = request.body.password;
@@ -59,6 +55,6 @@ const savePassword = async (request, response) =>{
     response.status(200);
     response.send({result:"Saved"});
 }
-app.post('/signup', signup);
+
 app.post('/signup', savePassword);
 

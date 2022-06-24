@@ -1,1 +1,1 @@
-curl -d "@data_signup.json" -H "content-type: application/json" -X POST http://localhost:3000/signup
+curl -d "@data.json" -H "content-type: application/json" -X POST https://cammie-nodejs.cit270.com/signup
