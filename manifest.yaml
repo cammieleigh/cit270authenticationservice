@@ -18,8 +18,7 @@ spec:
           command: ["npm"]
           args: ["run","start"]
           ports:
-            - containerPort: 443
-            scheme: HTTPS 
+            - containerPort: 443 
           resources:
             limits:
               cpu: ".125"
@@ -38,6 +37,7 @@ spec:
             httpGet:
               path: /
               port: 443
+              scheme: HTTPS
             initialDelaySeconds: 3
             periodSeconds: 3
 
