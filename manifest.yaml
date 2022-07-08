@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cammie-cit270
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: cammie-cit270
+    template:
+      metadata:
+        labels:
+          app: cammie-cit270
+      spec:
+        containers:
+          - name: cammie-cit270
+            image: cammieleigh/cit270
+            command: ["npm"]
+            args: ["run","start"]
+            ports:
+              - containerPort: 443
+              resources:
+                limits:
+                  cpu: ".125"
+                  memory: "500Mi"
+                requests:
+                  cpu: ".1"
+                  memory: "250Mi"
+              livenessProbe:
+                httpGet:
+                  path: /
+                  port: 443
+                initialDelaySeconds: 3
+                periodSeconds: 3
+              readinessProbe: 
+                httpGet:
+                  path: /
+                  port: 443
+                initialDelaySeconds: 3
+                periodSeconds: 3
