@@ -5,6 +5,7 @@ const express = require('express'); //import the library
 const app = express(); //use the library
 const md5 = require('md5');
 const {createClient} = require('redis');
+const port = 3000;
 
 
 
@@ -14,16 +15,19 @@ redisClient = createClient(
     {url: 'redis://default@cammie-redis.cit270.com:6379',});
 
 
-https.createServer({
-    key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.cert'),
-    passphrase: 'P@ssw0rd'
-}, app).listen(443, async () => {
+// https.createServer({
+//    key: fs.readFileSync('server.key'),
+//    cert: fs.readFileSync('server.cert'),
+//    passphrase: 'P@ssw0rd'
+// }, app).listen(443, async () => {
+//    await redisClient.connect();
+//     console.log('Listening...')
+// })
+
+app.listen(port, async()=>{
     await redisClient.connect();
-    console.log('Listening...')
-})
-
-
+    console.log('Listening on port: ', port);
+});
 //compare the hashed version of the password that was sent with the hashed version in the database
 
 
